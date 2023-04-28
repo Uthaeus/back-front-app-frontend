@@ -7,7 +7,9 @@ import HomePage from "./pages/home";
 import ErrorPage from "./pages/error";
 import Meetups from "./pages/meetups";
 import { MeetupContext } from "./store/meetup-context";
-import MeetupDetail from "./components/meetupDetail";
+import MeetupDetail from "./components/meetup/meetupDetail";
+import NewMeetup from "./components/meetup/new-meetup";
+import EditMeetup from "./components/meetup/edit-meetup";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "/meetups/:meetupId",
         element: <MeetupDetail />
+      },
+      {
+        path: "/meetups/:meetupId/edit",
+        element: <EditMeetup />
+      },
+      {
+        path: "/meetup/new",
+        element: <NewMeetup />
       }
     ]
   }

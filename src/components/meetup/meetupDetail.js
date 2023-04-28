@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useParams } from "react-router";
 
-import { MeetupContext } from "../store/meetup-context";
+import { MeetupContext } from "../../store/meetup-context";
 
 function MeetupDetail() {
     const params = useParams();
