@@ -37,12 +37,12 @@ function App() {
       })
       .then((data) => {
         console.log("useEffect App data", data);
-        meetCtx.addMeetup(data);
+        meetCtx.initializeMeetups(data);
       })
       .catch((error) => {
         console.log("useEffect App error", error);
       });
-  }, []);
+  }, [meetCtx]);
 
   return <RouterProvider router={router} />
 }

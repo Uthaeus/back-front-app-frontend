@@ -2,6 +2,7 @@ import { createContext, useState } from 'react';
 
 export const MeetupContext = createContext({
     meetups: [],
+    initializeMeetups: (meetups) => { },
     addMeetup: (meetupData) => { },
     removeMeetup: (meetupId) => { },
     updateMeetup: (meetupId, meetupData) => { }
@@ -9,6 +10,10 @@ export const MeetupContext = createContext({
 
 function MeetupContextProvider({ children }) {
     const [meetups, setMeetups] = useState([]);
+
+    function initializeMeetups(meetups) {
+        setMeetups(meetups);
+    }
 
     function addMeetup(meetupData) {
         setMeetups((prevMeetups) => {
@@ -34,6 +39,7 @@ function MeetupContextProvider({ children }) {
 
     const context = {
         meetups,
+        initializeMeetups,
         addMeetup,
         removeMeetup,
         updateMeetup

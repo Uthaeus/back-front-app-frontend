@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { createContext } from "react";
+
+import { MeetupContext } from "../store/meetup-context";
 
 function Meetups() {
-    const [meetups, setMeetups] = useState([]);
+    const meetCtx = createContext(MeetupContext);
 
-    return <div>Meetups</div>
+    const content = meetCtx.meetups.map((meetup) => {
+        return <li key={meetup.id}>{meetup.title}</li>
+    });
+
+    return (
+        <div className="meetups-container">
+            <h1>Meetups</h1>
+            <ul>{content}</ul>
+        </div>
+    );
 }
 
 export default Meetups;
