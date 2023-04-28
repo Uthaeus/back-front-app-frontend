@@ -20,7 +20,7 @@ function MeetupForm() {
         setTitle(value);
         break;
       case "image":
-        setImage(value);
+        setImage(event.target.files[0]);
         break;
       case "time":
         setTime(value);
@@ -36,23 +36,28 @@ function MeetupForm() {
     }
   }
 
+  function buildForm() {
+    const formData = new FormData();
+
+    formData.append("meetup[title]", title);
+    formData.append("meetup[time]", time);
+    formData.append("meetup[description]", description);
+    formData.append("meetup[location]", location);
+
+    if (image) {
+      formData.append("meetup[image]", image);
+    }
+
+    console.log("buildForm formData", formData);
+    return formData;
+  }
+
   function submitHandler(event) {
     event.preventDefault();
 
-    const meetupData = {
-      title,
-      image,
-      time,
-      description,
-      location,
-    };
-
     fetch("http://localhost:3000/meetups", {
       method: "POST",
-      body: JSON.stringify(meetupData),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: buildForm()
     })
       .then((response) => {
         if (response.ok) {
@@ -68,7 +73,6 @@ function MeetupForm() {
         console.log("submitHandler error", error);
       });
 
-    console.log(meetupData);
   }
 
   return (
@@ -129,7 +133,6 @@ function MeetupForm() {
             className="form-control"
             id="image"
             onChange={inputChangeHandler}
-            value={image}
           />
         </div>
 
