@@ -1,45 +1,113 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 function MeetupForm() {
-    const [title, setTitle] = useState("");
-    const [image, setImage] = useState("");
-    const [time, setTime] = useState("");
-    const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+  const [time, setTime] = useState("");
+  const [description, setDescription] = useState("");
+  const navigate = useNavigate();
 
-    function submitHandler(event) {
-        event.preventDefault();
+  function inputChangeHandler(event) {
+    const { name, value } = event.target;
 
-        const meetupData = {
-            title,
-            image,
-            time,
-            description
-        };
-
-        console.log(meetupData);
+    switch (name) {
+      case "title":
+        setTitle(value);
+        break;
+      case "image":
+        setImage(value);
+        break;
+      case "time":
+        setTime(value);
+        break;
+      case "description":
+        setDescription(value);
+        break;
+      default:
+        break;
     }
+  }
 
-    return (
-        <form className="meetup-form-container" onSubmit={submitHandler}>
-            <div className="row g-3">
-                <div className="col-md-6">
-                    <label htmlFor="title" className="form-label">Title</label>
-                    <input type="text" className="form-control" id="title" />
+  function submitHandler(event) {
+    event.preventDefault();
 
-                    <label htmlFor="image" className="form-label">Image</label>
-                    <input type="file" className="form-control" id="image" />
+    const meetupData = {
+      title,
+      image,
+      time,
+      description,
+    };
 
-                    <label htmlFor="time" className="form-label">Time</label>
-                    <input type="datetime-local" className="form-control" id="time" />
-                </div>
+    fetch("http://localhost:3000/meetups/create", {
+        method: "POST",
+        body: JSON.stringify(meetupData),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    }).then((response) => {
+        if (response.ok) {
+            navigate("/meetups");
+        } else {
+            throw new Error("Something went wrong");
+        }
+    })
+    .catch((error) => {
+        console.log("submitHandler error", error);
+    });
 
-                <div className="col-md-6">
-                    <label htmlFor="description" className="form-label">Description</label>
-                    <textarea className="form-control" id="description" rows="5"></textarea>
-                </div>
-            </div>
-        </form>
-    );
+    console.log(meetupData);
+  }
+
+  return (
+    <form className="meetup-form-container" onSubmit={submitHandler}>
+      <div className="row g-3">
+        <div className="col-md-6">
+          <label htmlFor="title" className="form-label">
+            Title
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="title"
+            onChange={inputChangeHandler}
+          />
+
+          <label htmlFor="image" className="form-label">
+            Image
+          </label>
+          <input
+            type="file"
+            className="form-control"
+            id="image"
+            onChange={inputChangeHandler}
+          />
+
+          <label htmlFor="time" className="form-label">
+            Time
+          </label>
+          <input
+            type="datetime-local"
+            className="form-control"
+            id="time"
+            onChange={inputChangeHandler}
+          />
+        </div>
+
+        <div className="col-md-6">
+          <label htmlFor="description" className="form-label">
+            Description
+          </label>
+          <textarea
+            className="form-control"
+            id="description"
+            rows="5"
+            onChange={inputChangeHandler}
+          />
+        </div>
+      </div>
+    </form>
+  );
 }
 
 export default MeetupForm;
