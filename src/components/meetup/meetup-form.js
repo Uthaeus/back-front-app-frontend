@@ -8,12 +8,13 @@ function MeetupForm() {
   const [image, setImage] = useState("");
   const [time, setTime] = useState("");
   const [description, setDescription] = useState("");
+  const [location, setLocation] = useState("");
   const navigate = useNavigate();
   const meetCtx = useContext(MeetupContext);
 
   function inputChangeHandler(event) {
     const { id, value } = event.target;
-    
+
     switch (id) {
       case "title":
         setTitle(value);
@@ -27,6 +28,9 @@ function MeetupForm() {
       case "description":
         setDescription(value);
         break;
+      case "location":
+        setLocation(value);
+        break;
       default:
         break;
     }
@@ -36,29 +40,33 @@ function MeetupForm() {
     event.preventDefault();
 
     const meetupData = {
-        title,
-        image,
-        time,
-        description,
+      title,
+      image,
+      time,
+      description,
+      location,
     };
 
     fetch("http://localhost:3000/meetups", {
-        method: "POST",
-        body: JSON.stringify(meetupData),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    }).then((response) => {
-        if (response.ok) {
-            meetCtx.addMeetup(meetupData);
-            navigate("/meetups");
-        } else {
-            throw new Error("Something went wrong");
-        }
+      method: "POST",
+      body: JSON.stringify(meetupData),
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    .catch((error) => {
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Something went wrong");
+        }
+      })
+      .then((data) => {
+        navigate(`/meetups/${data.id}`);
+      })
+      .catch((error) => {
         console.log("submitHandler error", error);
-    });
+      });
 
     console.log(meetupData);
   }
@@ -78,17 +86,6 @@ function MeetupForm() {
             value={title}
           />
 
-          <label htmlFor="image" className="form-label">
-            Image
-          </label>
-          <input
-            type="file"
-            className="form-control"
-            id="image"
-            onChange={inputChangeHandler}
-            value={image}
-          />
-
           <label htmlFor="time" className="form-label">
             Time
           </label>
@@ -98,6 +95,17 @@ function MeetupForm() {
             id="time"
             onChange={inputChangeHandler}
             value={time}
+          />
+
+          <label htmlFor="location" className="form-label">
+            Location
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="location"
+            onChange={inputChangeHandler}
+            value={location}
           />
         </div>
 
@@ -112,12 +120,23 @@ function MeetupForm() {
             onChange={inputChangeHandler}
             value={description}
           />
+
+          <label htmlFor="image" className="form-label">
+            Image
+          </label>
+          <input
+            type="file"
+            className="form-control"
+            id="image"
+            onChange={inputChangeHandler}
+            value={image}
+          />
         </div>
 
         <div className="col-12">
-            <button type="submit" className="btn btn-primary">
-                Submit
-            </button>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
         </div>
       </div>
     </form>

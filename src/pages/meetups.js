@@ -9,8 +9,16 @@ function Meetups() {
     const meetCtx = useContext(MeetupContext);
 
     useEffect(() => {
-        console.log('useEffect Meetups');
-        setMeetups(meetCtx.meetups);
+        fetch("http://localhost:3000/meetups")
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setMeetups(data);
+            })
+            .catch((error) => {
+                console.log("useEffect meetups error", error);
+            });
     }, [meetCtx.meetups]);
 
     const content = meetups.map((meetup) => {

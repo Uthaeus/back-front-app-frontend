@@ -1,15 +1,22 @@
-import { useContext } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-
-import { MeetupContext } from "../../store/meetup-context";
 
 function MeetupDetail() {
     const params = useParams();
-    const meetCtx = useContext(MeetupContext);
+    const [meetup, setMeetup] = useState({});
     
-    const meetup = meetCtx.meetups.find((meetup) => {
-        return meetup.id === +params.meetupId;
-    });
+    useEffect(() => {
+        fetch(`http://localhost:3000/meetups/${params.meetupId}`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                setMeetup(data);
+            })
+            .catch((error) => {
+                console.log("useEffect meetup detail error", error);
+            });
+    }, [params.meetupId]);
 
     return (
         <div>
@@ -17,6 +24,7 @@ function MeetupDetail() {
             <img src={meetup.image} alt={meetup.title} />
             <h2>{meetup.title}</h2>
             <p>{meetup.description}</p>
+            <p>{meetup.location}</p>
             <p>{meetup.time}</p>
         </div>
     );
