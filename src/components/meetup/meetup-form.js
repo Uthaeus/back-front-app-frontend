@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
+
+import { MeetupContext } from "../../store/meetup-context";
 
 function MeetupForm() {
   const [title, setTitle] = useState("");
@@ -7,11 +9,12 @@ function MeetupForm() {
   const [time, setTime] = useState("");
   const [description, setDescription] = useState("");
   const navigate = useNavigate();
+  const meetCtx = useContext(MeetupContext);
 
   function inputChangeHandler(event) {
-    const { name, value } = event.target;
-
-    switch (name) {
+    const { id, value } = event.target;
+    
+    switch (id) {
       case "title":
         setTitle(value);
         break;
@@ -33,13 +36,13 @@ function MeetupForm() {
     event.preventDefault();
 
     const meetupData = {
-      title,
-      image,
-      time,
-      description,
+        title,
+        image,
+        time,
+        description,
     };
 
-    fetch("http://localhost:3000/meetups/create", {
+    fetch("http://localhost:3000/meetups", {
         method: "POST",
         body: JSON.stringify(meetupData),
         headers: {
@@ -47,6 +50,7 @@ function MeetupForm() {
         },
     }).then((response) => {
         if (response.ok) {
+            meetCtx.addMeetup(meetupData);
             navigate("/meetups");
         } else {
             throw new Error("Something went wrong");
@@ -71,6 +75,7 @@ function MeetupForm() {
             className="form-control"
             id="title"
             onChange={inputChangeHandler}
+            value={title}
           />
 
           <label htmlFor="image" className="form-label">
@@ -81,6 +86,7 @@ function MeetupForm() {
             className="form-control"
             id="image"
             onChange={inputChangeHandler}
+            value={image}
           />
 
           <label htmlFor="time" className="form-label">
@@ -91,6 +97,7 @@ function MeetupForm() {
             className="form-control"
             id="time"
             onChange={inputChangeHandler}
+            value={time}
           />
         </div>
 
@@ -103,7 +110,14 @@ function MeetupForm() {
             id="description"
             rows="5"
             onChange={inputChangeHandler}
+            value={description}
           />
+        </div>
+
+        <div className="col-12">
+            <button type="submit" className="btn btn-primary">
+                Submit
+            </button>
         </div>
       </div>
     </form>

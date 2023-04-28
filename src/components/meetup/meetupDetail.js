@@ -8,7 +8,6 @@ function MeetupDetail() {
     const meetCtx = useContext(MeetupContext);
     
     const meetup = meetCtx.meetups.find((meetup) => {
-        console.log(meetup.id);
         return meetup.id === +params.meetupId;
     });
 
@@ -18,6 +17,7 @@ function MeetupDetail() {
             <img src={meetup.image} alt={meetup.title} />
             <h2>{meetup.title}</h2>
             <p>{meetup.description}</p>
+            <p>{meetup.time}</p>
         </div>
     );
 }
