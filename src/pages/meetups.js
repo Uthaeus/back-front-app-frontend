@@ -1,18 +1,21 @@
-import { createContext } from "react";
+import { useContext } from "react";
 
 import { MeetupContext } from "../store/meetup-context";
+import MeetupItem from "../components/meetupItem";
 
 function Meetups() {
-    const meetCtx = createContext(MeetupContext);
+    const meetCtx = useContext(MeetupContext);
 
     const content = meetCtx.meetups.map((meetup) => {
-        return <li key={meetup.id}>{meetup.title}</li>
+        return <MeetupItem key={meetup.id} item={meetup} />
     });
 
     return (
         <div className="meetups-container">
             <h1>Meetups</h1>
-            <ul>{content}</ul>
+            <div>
+                {content}
+            </div>
         </div>
     );
 }

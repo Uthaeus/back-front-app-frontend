@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { RouterProvider } from "react-router";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -7,6 +7,7 @@ import HomePage from "./pages/home";
 import ErrorPage from "./pages/error";
 import Meetups from "./pages/meetups";
 import { MeetupContext } from "./store/meetup-context";
+import MeetupDetail from "./components/meetupDetail";
 
 const router = createBrowserRouter([
   {
@@ -21,28 +22,30 @@ const router = createBrowserRouter([
       {
         path: "/meetups",
         element: <Meetups />
+      },
+      {
+        path: "/meetups/:meetupId",
+        element: <MeetupDetail />
       }
     ]
   }
 ]);
 
 function App() {
-  const meetCtx = createContext(MeetupContext);
+  const meetCtx = useContext(MeetupContext);
 
   useEffect(() => {
-    fetch("localhost:3000/meetups")
+    fetch("http://localhost:3000/meetups")
       .then((response) => {
-        console.log("useEffect App response", response);
         return response.json();
       })
       .then((data) => {
-        console.log("useEffect App data", data);
         meetCtx.initializeMeetups(data);
       })
       .catch((error) => {
         console.log("useEffect App error", error);
       });
-  }, [meetCtx]);
+  }, []);
 
   return <RouterProvider router={router} />
 }
