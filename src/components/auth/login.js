@@ -1,28 +1,79 @@
-import { useEffect } from "react";
+import { useState } from "react";
 
 function Login() {
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
 
-    useEffect(() => {
-        fetch("http://localhost:3000/users/sign_in")
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw response;
-            })
-            .then((data) => {
-                console.log(data);
-            })
-            .catch((error) => {
-                console.log('login', error);
-            });
-    }, []);
+  function inputChangeHandler(event) {
+    const { id, value } = event.target;
 
-    return (
-        <div>
-            <h1>Login</h1>
+    switch (id) {
+      case "password":
+        setPassword(value);
+        break;
+      case "username":
+        setUsername(value);
+        break;
+      default:
+        break;
+    }
+  }
+
+  function submitHandler(event) {
+    event.preventDefault();
+
+    fetch("http://localhost:3000/users/sign_in", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: { password, username } }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        console.log("login", error);
+      });
+  }
+
+  return (
+    <div>
+      <h1>Login</h1>
+
+      <form onSubmit={submitHandler}>
+        <div className="form-group">
+          <label htmlFor="username" className="form-label">
+            Username
+          </label>
+          <input
+            type="username"
+            id="username"
+            className="form-control"
+            onChange={inputChangeHandler}
+            value={username}
+          />
         </div>
-    );
+
+        <div className="form-group">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            className="form-control"
+            onChange={inputChangeHandler}
+            value={password}
+          />
+        </div>
+
+        <button className="btn btn-primary" type="submit">Login</button>
+      </form>
+    </div>
+  );
 }
 
 export default Login;

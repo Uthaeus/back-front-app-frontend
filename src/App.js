@@ -10,6 +10,8 @@ import MeetupDetail from "./components/meetup/meetupDetail";
 import NewMeetup from "./components/meetup/new-meetup";
 import EditMeetup from "./components/meetup/edit-meetup";
 import AuthPage from "./components/auth/auth";
+import Login from "./components/auth/login";
+import Signup from "./components/auth/signup";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +46,14 @@ const router = createBrowserRouter([
     element: <AuthPage />,
     errorElement: <ErrorPage />,
     children: [
-      
+      {
+        path: "/login",
+        element: <Login />
+      },
+      {
+        path: "/signup",
+        element: <Signup />
+      }
     ]
   }
 ]);

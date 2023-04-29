@@ -1,7 +1,6 @@
 import { useState } from "react";
+import { Outlet } from "react-router";
 
-import Login from "./login";
-import Signup from "./signup";
 import MainNavigation from "../navigation/main-navigation";
 
 function AuthPage() {
@@ -11,13 +10,7 @@ function AuthPage() {
     <div>
       <MainNavigation />
 
-      <h1>Auth Page</h1>
-
-      {loginToggel ? <Login /> : <Signup />}
-
-      <button className="btn" onClick={() => setLoginToggel(!loginToggel)}>
-        {loginToggel ? "Signup" : "Login"}
-      </button>
+      <Outlet />
     </div>
   );
 }
