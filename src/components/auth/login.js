@@ -22,21 +22,19 @@ function Login() {
   function submitHandler(event) {
     event.preventDefault();
 
-    fetch("http://localhost:3000/users/sign_in", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user: { password, username } }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log(response);
-        }
-      })
-      .catch((error) => {
-        console.log("login", error);
-      });
+    // fetch("http://localhost:3000/users/login", {
+    //   method: "POST",
+    //   body: JSON.stringify({ user: { password, username } }),
+    // })
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       console.log(response);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log("login", error);
+    //   });
+    console.log('login');
   }
 
   return (

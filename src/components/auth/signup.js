@@ -30,21 +30,22 @@ function Signup() {
     function submitHandler(event) {
         event.preventDefault();
 
-        fetch("http://localhost:3000/users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ user: { email, password, password_confirmation: passwordConfirmation, username } }),
-        })
-        .then((response) => {
-            if (response.ok) {
-                console.log(response);
-            }
-        })
-        .catch((error) => {
-            console.log("signup", error);
-        });
+        // fetch("http://localhost:3000/users/", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({ user: { email, password, password_confirmation: passwordConfirmation, username } }),
+        // })
+        // .then((response) => {
+        //     if (response.ok) {
+        //         console.log(response);
+        //     }
+        // })
+        // .catch((error) => {
+        //     console.log("signup", error);
+        // });
+        console.log('signup');
     }
 
   return (
