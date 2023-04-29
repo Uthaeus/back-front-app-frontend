@@ -31,6 +31,7 @@ function Meetups() {
                 <h1 className="meetups-title">Meetups</h1>
                 <Link to="/meetup/new" className="new-meetup-link">Create New Meetup</Link>
             </div>
+            <hr />
             <div className="meetups-content-wrapper">
                 {content}
             </div>

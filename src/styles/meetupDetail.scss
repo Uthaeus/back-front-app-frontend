@@ -7,26 +7,39 @@
     .meetup-detail-header {
         margin-bottom: 25px;
         border-bottom: 1px solid grey;
+        box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.282);
     }
 
     .meetup-detail-info-wrapper {
         display: flex;
         justify-content: space-evenly;
+        align-items: center;
         margin-bottom: 25px;
-        border-bottom: 1px solid grey;
     }
 
     .meetup-detail-description-wrapper {
         width: 75%;
         min-height: 250px;
         margin: 0 auto;
-        border: 1px solid grey;
+        border: 1px solid rgb(37, 42, 49);
+        border-radius: 2px;
         padding: 10px;
         color: #ffffff;
         background-color: #16161641;
+        box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.282);
 
         .detail-description {
             font-size: 1.1em;
+        }
+    }
+
+    .detail-actions-wrapper {
+        width: 80%;
+        margin-top: 4rem;
+
+        .btn {
+            margin: 0 10px;
+            padding: 4px 30px;
         }
     }
 }

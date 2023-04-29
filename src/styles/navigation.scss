@@ -7,31 +7,47 @@
     background-color: bisque;
 
     .nav-title-wrapper {
+        width: 50%;
+        text-align: center;
 
         h3 {
             font-size: 1.5rem;
             font-weight: 700;
-            color: #3f36f4;
-            margin: 0;
+            color: #161616;
         }
     }
 
     .links-wrapper {
-        padding: 0 20px;
+        width: 50%;
+        padding: 8px 20px;
+        display: flex;
+        justify-content: space-evenly;
+
+        .nav-link {
+            font-size: 1.2em;
+            color: #274689;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                color: #4c5e86;
+            }
+        }
 
         .active {
-            color: #3f36f4;
+            color: #172644;
+            text-decoration: underline;
         }
 
         .nav-btn {
             border: none;
             background-color: transparent;
+            font-size: 1.2em;
             color: #274689;
             transition: all 0.3s ease-in-out;
 
             &:hover {
-                cursor: pointer;
-                color: #3f36f4;
+                color: #4c5e86;
             }
         }
     }

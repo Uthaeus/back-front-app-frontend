@@ -1,18 +1,22 @@
 
 .meetup-item-wrapper {
     width: 90%;
-    margin: 0 auto;
-    border: 1px solid white;
+    min-height: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: rgba(250, 235, 215, 0.205);
+    border: 1px solid rgba(255, 255, 255, 0.221);
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
     transition: all 0.3s ease-in-out;
 
     .meetup-item-title {
         font-size: 2em;
         font-weight: 700;
-        color: #3f36f4;
+        color: #121212;
         margin: 0;
     }
 
