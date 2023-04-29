@@ -10,6 +10,7 @@ function MainNavigation() {
             <div>
                 <NavLink to="/">Home</NavLink>
                 <NavLink to="/meetups">Meetups</NavLink>
+                <NavLink to="/auth">Log In/Sign Up</NavLink>
             </div>
         </div>
     );

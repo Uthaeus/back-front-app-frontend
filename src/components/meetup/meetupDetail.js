@@ -9,11 +9,9 @@ function MeetupDetail() {
     useEffect(() => {
         fetch(`http://localhost:3000/meetups/${params.meetupId}`)
             .then((response) => {
-                
                 return response.json();
             })
             .then((data) => {
-                console.log("useEffect meetup detail data", data);
                 setMeetup(data);
             })
             .catch((error) => {
@@ -36,11 +34,13 @@ function MeetupDetail() {
     return (
         <div>
             <h1>Meetup Detail</h1>
-            <img src={meetup.image} alt={meetup.title} />
+            <h2>{params.meetupId}</h2>
             <h2>{meetup.title}</h2>
-            <p>{meetup.description}</p>
-            <p>{meetup.location}</p>
-            <p>{meetup.time}</p>
+            <h2>{meetup.time}</h2>
+            <h2>{meetup.description}</h2>
+
+            {meetup.image && <img src={meetup.image.url} alt={meetup.title} />}
+            
             <button className="btn btn-primary" onClick={deleteHandler}>Delete</button>
         </div>
     );

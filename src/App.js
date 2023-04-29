@@ -9,6 +9,7 @@ import Meetups from "./pages/meetups";
 import MeetupDetail from "./components/meetup/meetupDetail";
 import NewMeetup from "./components/meetup/new-meetup";
 import EditMeetup from "./components/meetup/edit-meetup";
+import AuthPage from "./components/auth/auth";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
         path: "/meetup/new",
         element: <NewMeetup />
       }
+    ]
+  },
+  {
+    path: "/auth",
+    element: <AuthPage />,
+    errorElement: <ErrorPage />,
+    children: [
+      
     ]
   }
 ]);

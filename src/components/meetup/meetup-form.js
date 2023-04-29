@@ -1,7 +1,5 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-
-import { MeetupContext } from "../../store/meetup-context";
 
 function MeetupForm() {
   const [title, setTitle] = useState("");
@@ -10,7 +8,6 @@ function MeetupForm() {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const navigate = useNavigate();
-  const meetCtx = useContext(MeetupContext);
 
   function inputChangeHandler(event) {
     const { id, value } = event.target;
@@ -48,7 +45,6 @@ function MeetupForm() {
       formData.append("meetup[image]", image);
     }
 
-    console.log("buildForm formData", formData);
     return formData;
   }
 
@@ -67,7 +63,7 @@ function MeetupForm() {
         }
       })
       .then((data) => {
-        navigate(`/meetups/${data.id}`);
+        navigate(`/meetups/`);
       })
       .catch((error) => {
         console.log("submitHandler error", error);
