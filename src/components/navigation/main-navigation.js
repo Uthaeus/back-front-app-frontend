@@ -21,16 +21,16 @@ function MainNavigation() {
     }
 
     return (
-        <div>
-            <div>
+        <div className="navigation-container">
+            <div className="nav-title-wrapper">
                 <h3>Meetup App</h3>
             </div>
-            <div>
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/meetups">Meetups</NavLink>
-                <NavLink to="/auth/login">Log In</NavLink>
-                <NavLink to="/auth/signup">Sign Up</NavLink>
-                <button onClick={logoutHandler}>Logout</button>
+            <div className="links-wrapper">
+                <NavLink to="/" className={({isActive}) => isActive ? "nav-link active" : "nav-link"}>Home</NavLink>
+                <NavLink to="/meetups" className={({isActive}) => isActive ? "nav-link active" : "nav-link"}>Meetups</NavLink>
+                <NavLink to="/auth/login" className={({isActive}) => isActive ? "nav-link active" : "nav-link"}>Log In</NavLink>
+                <NavLink to="/auth/signup" className={({isActive}) => isActive ? "nav-link active" : "nav-link"}>Sign Up</NavLink>
+                <button onClick={logoutHandler} className="nav-btn">Logout</button>
             </div>
         </div>
     );

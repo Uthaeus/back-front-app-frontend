@@ -1,0 +1,38 @@
+
+.navigation-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: bisque;
+
+    .nav-title-wrapper {
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3f36f4;
+            margin: 0;
+        }
+    }
+
+    .links-wrapper {
+        padding: 0 20px;
+
+        .active {
+            color: #3f36f4;
+        }
+
+        .nav-btn {
+            border: none;
+            background-color: transparent;
+            color: #274689;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                cursor: pointer;
+                color: #3f36f4;
+            }
+        }
+    }
+}
