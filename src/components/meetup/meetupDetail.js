@@ -32,14 +32,32 @@ function MeetupDetail() {
     }
 
     return (
-        <div>
-            <h1>Meetup Detail</h1>
-            <h2>{params.meetupId}</h2>
-            <h2>{meetup.title}</h2>
-            <h2>{meetup.time}</h2>
-            <h2>{meetup.description}</h2>
+        <div className="meetup-detail-container">
+            <div className="row">
+                <div className="col-12">
+                    <div className="meetup-detail-header" style={{
+                        backgroundImage: `url(${meetup.image ? meetup.image.url : ""})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        height: "300px"
+                    }} />
+                </div>
+                
+                <div className="col-12">
+                    <div className="meetup-detail-info-wrapper">
+                        <h2>{meetup.title}</h2>
+                        <p>{meetup.location}</p>
+                        <p>{meetup.time}</p>
+                    </div>
+                </div>
 
-            {meetup.image && <img src={meetup.image.url} alt={meetup.title} />}
+                <div className="col-12">
+                    <div className="meetup-detail-description-wrapper">
+                        <p className="detail-description">{meetup.description}</p>
+                    </div>
+                </div>
+            </div>
             
             <button className="btn btn-primary" onClick={deleteHandler}>Delete</button>
         </div>
