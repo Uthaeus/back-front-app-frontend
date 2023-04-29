@@ -1,0 +1,43 @@
+@import 'meetupItem';
+
+.meetups-container {
+    width: 80%;
+    min-height: calc(100vh - 100px);
+    margin: 0 auto;
+
+    .meetups-header {
+        width: 60%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        .meetups-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #3f36f4;
+            margin: 0;
+        }
+
+        .new-meetup-link {
+            color: #ffffff;
+            margin-top: 20px;
+            font-size: 1.2em;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                cursor: pointer;
+                color: #3f36f4;
+                border-bottom: 1px solid #3f36f4;
+            }
+        }
+    }
+
+    .meetups-content-wrapper {
+        width: 90%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

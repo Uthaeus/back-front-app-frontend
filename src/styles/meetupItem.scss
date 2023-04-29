@@ -1,0 +1,23 @@
+
+.meetup-item-wrapper {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+
+    .meetup-item-title {
+        font-size: 2em;
+        font-weight: 700;
+        color: #3f36f4;
+        margin: 0;
+    }
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+}

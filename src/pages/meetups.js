@@ -27,9 +27,11 @@ function Meetups() {
 
     return (
         <div className="meetups-container">
-            <h1>Meetups</h1>
-            <Link to="/meetup/new">Create New Meetup</Link>
-            <div>
+            <div className="meetups-header">
+                <h1 className="meetups-title">Meetups</h1>
+                <Link to="/meetup/new" className="new-meetup-link">Create New Meetup</Link>
+            </div>
+            <div className="meetups-content-wrapper">
                 {content}
             </div>
         </div>

@@ -1,11 +1,16 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 
 function MeetupItem({item}) {
+    const navigate = useNavigate();
+
+    function itemClickHandler() {
+        navigate(`/meetups/${item.id}`);
+    }
 
     return (
-        <div>
-            <Link to={`/meetups/${item.id}`}>{item.title}</Link>
+        <div className="meetup-item-wrapper" onClick={itemClickHandler}>
+            <h1 to={`/meetups/${item.id}`} className="meetup-item-title">{item.title}</h1>
         </div>
     );
 }
