@@ -1,0 +1,39 @@
+
+.error-container {
+    width: 80%;
+    min-height: calc(100vh - 100px);
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #f44336;
+    }
+
+    p {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #f44336;
+    }
+
+    a {
+        text-decoration: none;
+        color: #3f36f4;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 20px;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+    }
+}
