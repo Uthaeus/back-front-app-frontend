@@ -35,6 +35,9 @@ function MeetupDetail() {
     navigate("/meetups");
   }
 
+  let time = meetup.time ? meetup.time.split("T")[1].slice(0, 8) : "";
+    let date = meetup.time ? meetup.time.split("T")[0] : "";
+
   return (
     <div className="meetup-detail-container">
       <div className="row">
@@ -46,7 +49,7 @@ function MeetupDetail() {
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
-              height: "300px",
+              height: "200px",
             }}
           />
         </div>
@@ -55,7 +58,8 @@ function MeetupDetail() {
           <div className="meetup-detail-info-wrapper">
             <h2>{meetup.title}</h2>
             <p>{meetup.location}</p>
-            <p>{meetup.time}</p>
+            <p>{time}</p>
+            <p>{date}</p>
           </div>
         </div>
 
@@ -70,7 +74,7 @@ function MeetupDetail() {
             <button className="btn btn-primary" onClick={backToMeetupsHandler}>
               Back To Meetups
             </button>
-            <button className="btn btn-success">Edit</button>
+            <button className="btn btn-success" onClick={() => navigate(`/meetups/${params.meetupId}/edit`)}>Edit</button>
             <button className="btn btn-danger" onClick={deleteHandler}>
               Delete
             </button>

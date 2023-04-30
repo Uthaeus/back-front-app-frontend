@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-function MeetupForm() {
+function MeetupForm({ meetup }) {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [time, setTime] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const navigate = useNavigate();
+
+  
 
   function inputChangeHandler(event) {
     const { id, value } = event.target;
