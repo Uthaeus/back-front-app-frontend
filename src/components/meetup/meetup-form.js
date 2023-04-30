@@ -1,113 +1,48 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
+
+import Input from "../ui/Input";
+import Select from "../ui/Select";
 
 function MeetupForm({ meetup }) {
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [time, setTime] = useState("");
-  const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
-  const navigate = useNavigate();
-
   
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
 
-  function inputChangeHandler(event) {
-    const { id, value } = event.target;
-
-    switch (id) {
-      case "title":
-        setTitle(value);
-        break;
-      case "image":
-        setImage(event.target.files[0]);
-        break;
-      case "time":
-        setTime(value);
-        break;
-      case "description":
-        setDescription(value);
-        break;
-      case "location":
-        setLocation(value);
-        break;
-      default:
-        break;
-    }
-  }
-
-  function buildForm() {
-    const formData = new FormData();
-
-    formData.append("meetup[title]", title);
-    formData.append("meetup[time]", time);
-    formData.append("meetup[description]", description);
-    formData.append("meetup[location]", location);
-
-    if (image) {
-      formData.append("meetup[image]", image);
-    }
-
-    return formData;
-  }
-
-  function submitHandler(event) {
-    event.preventDefault();
-
-    fetch("http://localhost:3000/meetups", {
-      method: "POST",
-      body: buildForm()
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Something went wrong");
-        }
-      })
-      .then((data) => {
-        navigate(`/meetups/`);
-      })
-      .catch((error) => {
-        console.log("submitHandler error", error);
-      });
-
-  }
+  const submitHandler = (data) => {
+    console.log(data);
+  };
 
   return (
-    <form className="meetup-form-container" onSubmit={submitHandler}>
+    <form className="meetup-form-container" onSubmit={handleSubmit(submitHandler)}>
       <div className="row g-3">
         <div className="col-md-6">
           <label htmlFor="title" className="form-label">
             Title
           </label>
           <input
-            type="text"
             className="form-control"
             id="title"
-            onChange={inputChangeHandler}
-            value={title}
+            {...register("title", { required: true })}
           />
 
           <label htmlFor="time" className="form-label">
             Time
           </label>
           <input
-            type="datetime-local"
             className="form-control"
             id="time"
-            onChange={inputChangeHandler}
-            value={time}
+            {...register("time", { required: true })}
           />
 
           <label htmlFor="location" className="form-label">
             Location
           </label>
           <input
-            type="text"
             className="form-control"
             id="location"
-            onChange={inputChangeHandler}
-            value={location}
+            {...register("location", { required: true })}
           />
         </div>
 
@@ -119,18 +54,16 @@ function MeetupForm({ meetup }) {
             className="form-control"
             id="description"
             rows="5"
-            onChange={inputChangeHandler}
-            value={description}
+            {...register("description", { required: true })}
           />
 
           <label htmlFor="image" className="form-label">
             Image
           </label>
           <input
-            type="file"
             className="form-control"
             id="image"
-            onChange={inputChangeHandler}
+            {...register("image", { required: true })}
           />
         </div>
 
